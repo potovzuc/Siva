@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+     <link href="https://bootswatch.com/4/cyborg/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js" integrity="sha256-zG8v+NWiZxmjNi+CvUYnZwKtHzFtdO8cAKUIdB8+U9I=" crossorigin="anonymous"></script>
+	<script src="https://cdn.datatables.net/v/bs4/dt-1.10.16/cr-1.4.1/r-2.2.0/datatables.min.js"></script>
+  
+    <link rel="stylesheet" href="/public/darkly.css">
+    <!--link rel="stylesheet" href="/public/dashboard.css" /-->
+    <link rel='icon' href='<%= bot.user.displayAvatarURL() %>'>
+  <!--title><!%= bot.user.username %> Kayıt!</title-->
+	<style type="text/css">
+		/*.navigation ul {
+			list-style-type: none;
+		}
+		.navigation ul a {
+			text-decoration: none;
+		}
+		.navigation ul li {
+			float: left;
+      width: 150px;
+      padding: 8px;
+      background: #000000;
+      border-radius: 42px;
+      margin-right: 56px;
+      color: #ffff;
+      text-align: center;
+		}
+    
+		.navigation li ul {
+			display:none;
+			position:absolute;
+		}
+		.navigation li ul li {
+			clear:both;
+			display : block;
+			border-radius: 0px;
+			cursor: pointer;
+		}*/
+    .aninicindekiisim {
+      color:white;
+      line-height: 1.5;
+    }
+    .navigation ul {
+			list-style-type: none;
+		}
+		.navigation ul a {
+			text-decoration: none;
+		}
+		.navigation ul li a {
+			display: block;
+		}
+		.navigation ul li {
+			float: left;
+
+      padding: 8px;
+      background: #000000;
+      border-radius: 42px;
+      margin-right: 56px;
+      color: #ffff;
+      text-align: center;
+		}
+
+		.navigation li ul {
+			display:none;
+			position:absolute;
+		}
+		.navigation li:hover ul {
+			display:block;
+			margin-top:9px;
+			margin-left:-49px;
+		}
+		.navigation li ul li {
+			clear:both;
+			display : block;
+			border-radius: 0px;
+			padding: 3px;
+			cursor: pointer;
+		}
+		.navigation li ul li a {
+			display: block;
+		}
+
+
+	</style>
+</head>
+
+<body>
+   <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet"> 
+	<nav style="background-color: #000000;" class="navbar navbar">
+    <div class="container" style="font-family: 'Comfortaa', cursive;">
+			<a class="navbar-brand" href="/"><img src="<%= bot.user.displayAvatarURL() %>" width="30" height="30" class="d-inline-block align-top rounded-circle" alt="">
+        <font class="aninicindekiisim">  <%= bot.user.username %></font></a>
+			<div class="navigation" style="margin-left: 290px;">
+				<ul>
+          		<center>
+					<li><a href="/"><font color="#ffffff"><i class="fa fa-home" aria-hidden="true"></i> Ana sayfa</a></li>
+					<% if(user) { %>
+                <li><a href="/"><font color="#ffffff"></i><%= user.username %></a>
+							<ul>
+								<li><a href="/dashboard"><font style="margin-right: 2px;" color="#ffffff"><i class="fa fa-cogs" aria-hidden="true" style="margin-right: 4px;"></i> Yönetim paneli!</font></a></li>
+								<% if(bot.ayarlar.sahip.includes(user.id)) { %>
+									<li><a href="/admin"><font style="padding-right: 15px;" color="#ffffff"><i class="fa fa-key" aria-hidden="true" style="margin-right: 5px;"></i> Yetkili paneli!</font></a></li>
+								<% } %>
+								<li><a href="/logout"><font style="padding-right: 37px;" color="#ffffff"><i class="fa fa-sign-out" aria-hidden="true" style="margin-right: 7px;"></i> Çıkış yap!</font></a></li>
+							</ul>
+						</li>
+					<% } else {%>
+						<li><a href="/login"><font color="#ffffff"><i class="fa fa-key" aria-hidden="true"></i> Giriş yap!</a></li>
+					<% } %>
+          </center>
+				</ul>
+			</div>
+		</div>
+	</nav>
+<p>
+  </p>
+	<div class="container">

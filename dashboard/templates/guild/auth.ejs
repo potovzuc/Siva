@@ -1,0 +1,23 @@
+<%- include('../blocks/authheader', {bot, user, path}) %>
+<%- include('../blocks/guild-modals', {bot, user, path}) %>
+</p>
+<div class="row">
+  <div class="col">   
+    <form method="post">
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0" style="margin: 0 !important;">
+        
+              <input type="number" style="width: 50%;height: 80%;/*! margin: 80px; */margin-left: 280px;/*! margin-bottom: 74px; */" name="rakamliset" id="rakamliset" placeholder="Lütfen size verilen kodu giriniz.">
+        
+          </div>
+          </div>
+    
+    
+      <div style="width: 100%; text-align: right; margin-top: 75px;margin-right: 80px;">
+        <a class="btn btn-danger" data-toggle="modal" data-target="#settingsResetModal" role="button" style="color: white">Yeni Kod<i class="fa fa-fw fa-cogs" aria-hidden="true"></i></a>
+        <button type="submit" class="btn btn-success">Onayla<i class="fa fa-fw fa-save" aria-hidden="true"></i></button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<% include ../blocks/footer %>

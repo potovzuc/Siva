@@ -1,0 +1,222 @@
+<%- include('../blocks/v12icinheader', {bot, user, path}) %>
+<%let serverQueue;%>
+<% const kanallar = guild.channels %>
+<%serverQueue = bot.queue.get(guild.id);%>
+
+<style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 61px;
+  height: 30px;
+}
+ 
+.switch input {
+  display:none;
+}
+ 
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #333333;
+  transition: .4s;
+}
+ 
+ 
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 24px;
+  width: 24px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+}
+ 
+input:checked + .slider {
+  background-color: #055973;
+}
+ 
+input:focus + .slider {
+  box-shadow: 0 0 1px #055973;
+}
+ 
+input:checked + .slider:before {
+  transform: translateX(30px);
+}
+ 
+.slider.round {
+  border-radius: 34px;
+}
+ 
+.slider.round:before {
+  border-radius: 50%;
+}
+ 
+#box {
+  padding-top:50px;
+}
+ 
+.heading {
+  font-size:40px;
+  font-weight:bold;
+  font-family:Impact, Serif;
+}
+ 
+ 
+.centereddiv {
+  padding-top:20px;
+}
+ 
+.subtitle {
+  padding-top:20px;
+  font-family:Times, Serif;
+  font-size:40px;
+}
+
+</style>
+
+
+  <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet"> 
+<div class="row">
+  <div class="col"> 
+    <form method="post">
+      <div style="width: 100%; text-align: center; margin-top: 20px; font-family: 'Comfortaa', cursive; font-variant: all-small-caps;">
+        <%if(!serverQueue) {%>
+          <h1>ŞU ANDA MÜZİK ÇALMAMAKTA</h1>
+          <h2 style="font-variant: initial; font-size: x-large;">eğer müzik açtıysanız sayfayı yenileyiniz.</h2>
+        
+        <% }else {%> 
+          <h1> Müzik Çalıyor - <%= serverQueue.songs[0].title%> </h1>
+
+          
+   <div class="input-group mb-2 mr-sm-2 mb-sm-0" style="margin: 0 !important;">
+     <div class="row" style="font-size: 25px">
+       <div class="input-group-addon" style="width: 97px; text-align: left; margin: 0; color:white">Durdur:</div> 
+       <%if(serverQueue.playing) {%>
+       <label style="margin-bottom: 9px;" class = "switch">
+         <input id="durdur" name="durdur" value="1" type = "checkbox">
+         <div class = "slider round"></div>
+       </label>
+       <%} else {%>
+       <script> 
+        $(document).ready(function(){
+          document.getElementById("durdur").checked = true;
+        })
+      </script>
+         <label style="margin-bottom: 9px;" class = "switch">
+           <input id="durdur" name="durdur" value="1" type = "checkbox">
+           <div class = "slider round"></div>
+         </label>
+       <%}%>
+     </div>  
+   </div>
+        
+    <div class="input-group mb-2 mr-sm-2 mb-sm-0" style="margin: 0 !important;">
+      <div class="row" style="font-size: 25px">
+        <div class="input-group-addon" style="width: 97px; text-align: left; margin: 0; color:white">Döngü:</div> 
+        <label class = "switch">
+          <%if(serverQueue.loop) {%>
+          <script> 
+        $(document).ready(function(){
+          document.getElementById("loop").checked = true;
+        })
+      </script>
+         <input id="loop" name="loop" value="1" type = "checkbox">
+         <div class = "slider round"></div>
+          <%} else {%>
+            <input id="loop" name="loop" value="1" type = "checkbox">
+           <div class = "slider round"></div>
+          <%}%>
+       </label>
+      </div>  
+    </div>
+        
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0" style="margin: 0 !important;">
+        <div class="row" style="font-size: 22px">
+          <div class="input-group-addon" style="width: 120px; text-align: left; margin: 0; color:white">Müzik Aç:</div>
+          </div>
+            <input style="width: 22%" name="sarki" id="sarki" placeholder="Bir şarkı ismi yazınız.">
+          </div>
+        <div class="input-group mb-2 mr-sm-2 mb-sm-0" style="margin: 0 !important;">
+        <div class="row" style="font-size: 22px">
+          <div class="input-group-addon" style="width: 120px; text-align: left; margin: 0; color:white">Ses:</div>
+          </div>
+            <input type="number" style="width: 22%; height: 34px;" min="1" max="100" name="ses" id="ses" value="<%=serverQueue.volume%>" placeholder="1 den 100'e kadar bir rakam yazınız.">
+          </div>
+        
+     <div style="text-align: right;">
+       <%if(serverQueue.songs[1]) {%>
+       <h4> ŞARKI KUYRUĞU; </h4>
+       <%="1. " + serverQueue.songs[1].title%> <input type="checkbox" name="songremove1" id="songremove1">
+       <br>
+       <%}%>
+       <%if(serverQueue.songs[2]) {%>
+       <%="2. " + serverQueue.songs[2].title%> <input type="checkbox" name="songremove2" id="songremove2">
+       <br>
+       <%}%>
+       <%if(serverQueue.songs[3]) {%>
+       <%="3. " + serverQueue.songs[3].title%> <input type="checkbox" name="songremove3" id="songremove3">
+       <br>
+       <%}%>
+       <%if(serverQueue.songs[4]) {%>
+       <%="4. " + serverQueue.songs[4].title%> <input type="checkbox" name="songremove4" id="songremove4">
+       <br>
+       <%}%>
+       <%if(serverQueue.songs[5]) {%>
+       <%="5. " + serverQueue.songs[5].title%> <input type="checkbox" name="songremove5" id="songremove5">
+       <br>
+       <%}%>
+       <%if(serverQueue.songs[6]) {%>
+       <%="6. " + serverQueue.songs[6].title%> <input type="checkbox" name="songremove6" id="songremove6">
+       <br>
+       <%}%>
+       <%if(serverQueue.songs[7]) {%>
+       <%="7. " + serverQueue.songs[7].title%> <input type="checkbox" name="songremove7" id="songremove7">
+       <br>
+       <%}%>
+       <%if(serverQueue.songs[8]) {%>
+       <%="8. " + serverQueue.songs[8].title%> <input type="checkbox" name="songremove8" id="songremove8">
+       <br>
+       <%}%>
+       <%if(serverQueue.songs[9]) {%>
+       <%="9. " + serverQueue.songs[9].title%> <input type="checkbox" name="songremove9" id="songremove9">
+       <br>
+       <%}%>
+       <%if(serverQueue.songs[10]) {%>
+       <%="10. " + serverQueue.songs[10].title%> <input type="checkbox" name="songremove10" id="songremove10">
+       <br>
+       <%}%>
+       <%if(serverQueue) {%>
+         <%if (serverQueue.songs[2]){%>
+           Bütün Şarkıları Temizle: <input type="checkbox" name="songsremoveall" id="songsremoveall">
+         <%}%>
+       <%}%>
+      </div>
+          <div style="width: 100%; text-align: right; margin-top: 20px;">
+            <!--a class="btn btn-danger" data-toggle="modal" data-target="#settingsResetModal" role="button" style="color: white">Ayarları sıfırla! <i class="fa fa-fw fa-cogs" aria-hidden="true"></i></a-->
+            <a class="btn btn-danger" data-toggle="modal" data-target="#MuzikGecmeModal" role="button" style="color: white">Şarkıyı Geç <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+            <button type="submit" class="btn btn-success">Değişiklikleri kaydet! <i class="fa fa-fw fa-save" aria-hidden="true"></i></button>
+          </div>  
+      <%}%>
+        </form>
+      </div>
+</div>
+</script>
+
+<script>
+  function muzikkaldir async (sayi) {
+    var x = await serverQueue.songs.splice(sayi, 1);
+    serverQueue.textChannel.send(`**${x[0].title}** Kuyruktan Kaldırıldı.`);
+    console.log("x")
+  }
+</script>
+
+
+<%- include('../blocks/guild-modals', {bot, user, path, serverQueue}) %>
+<%- include('../blocks/footer', {bot, user, path}) %>
