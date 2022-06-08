@@ -1,0 +1,73 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<div class="modal fade" id="settingsResetModal" tabindex="-1" role="dialog" aria-labelledby="settingsResetModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" style="background-color: #303030; color: #ffffff;">
+			<div class="modal-header" style="border: 0px;">
+				<h5 class="modal-title" id="settingsResetModalLabel">Emin misiniz?</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="background-color: #303030; color: #fff;">
+				<p>
+					 Yeni bir kod istediğinize emin misiniz?
+        </p>
+        <p>
+           Kod bot tarafından size DM yolu ile iletilecektir. Lütfen DM mesajlarınızı aktif etmeyi unutmayınız.
+        </p>
+			</div>
+			<div class="modal-footer" style="background-color: #303030; color: #000; border: 0px;">
+				<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Hayır!</button>
+				<a class="btn btn-outline-danger" href="/authorize/<%=user.id%>/auth/yeni-kod" role="button">Evet!</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<%if(serverQueue) {%>
+<div class="modal fade" id="MuzikGecmeModal" tabindex="-1" role="dialog" aria-labelledby="MuzikGecmeModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" style="background-color: #303030; color: #ffffff;">
+			<div class="modal-header" style="border: 0px;">
+        <%if(!serverQueue.loop) {%>
+				  <h5 class="modal-title" id="MuzikGecmeModalLabel">Emin misiniz?</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="background-color: #303030; color: #fff;">
+				<p>
+					 Şarkıyı geçmek istediğinize emin misiniz?
+        </p>
+			</div>
+			<div class="modal-footer" style="background-color: #303030; color: #000; border: 0px;">
+				<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Hayır!</button>
+				<a class="btn btn-outline-danger" href="/dashboard/<%=guild.id%>/manage/gec" role="button">Evet!</a>
+			</div>
+      <%} else {%>
+        <% if(serverQueue.loop) {%>
+          <h5 class="modal-title" id="MuzikGecmeModalLabel">Hata!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="background-color: #303030; color: #fff;">
+            <p>
+               Döngü açık olduğu için şarkı geçilemiyor.
+            </p>
+            <p>
+              Lütfen Döngüyü kapatınız.
+            </p>
+          </div>
+          <div class="modal-footer" style="background-color: #303030; color: #000; border: 0px;">
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal"><a class="fa fa-window-close"></a> Kapat!</button>
+          </div>
+        <%}%>
+      <%}%>
+		</div>
+	</div>
+</div>
+
+<%}%>

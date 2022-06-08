@@ -1,0 +1,46 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div class="card" style="width: 20rem">
+	<% if (guild.icon) { %>
+		<img class="d-inline-block align-top rounded-circle" style="width: 100%;" src="<%= `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=256` %>" alt="">
+	<% } else { %>
+		<canvas style="background-color: #7289da" class="d-inline-block align-top rounded-circle" id="<%= guild.name.split(' ').join('').replace(`'`, ``) %>" width="256px" height="320px"></canvas>
+		<script>
+			function draw() {
+				const ctx = document.getElementById("<%= guild.name.split(' ').join('').replace(`'`, ``) %>").getContext('2d');
+				ctx.font = '95px Arial';
+				ctx.textAlign = "center";
+				ctx.fillStyle = "white";
+				ctx.fillText("<%= guild.name.split(' ').map(v => v[0]).join('') %>", 125, 185);
+			};
+			draw();
+		</script>
+	<% } %>
+	<div class="card-block">
+		<h4 class="card-title" style="color: #ffff;"><br><center>
+			<%= guild.name %>
+		</h4></center><br>
+		<ul class="list-group list-group-flush" style="width: 100%; border: 0px;">
+			<li class="list-group-item" style="width: 100%; color: #ffffff; border: 0px;">
+				<strong>Sunucu sahibi</strong>: 
+				<i class="fa fa-fw fa-user" aria-hidden="true"></i>
+				<a <%= guild.owner.user.id %> style='color: #ffffff'><%= `${guild.owner.user.tag}` %></a>
+			</li>
+			<li class="list-group-item" style="color: #ffffff; border: 0px;">
+				<strong>Toplam kişi sayısı</strong>:
+				<i class="fa fa-fw fa-users" aria-hidden="true"></i>
+				<%= `${guild.memberCount - guild.members.filter(m => m.user.bot).size}` %>
+			</li>
+			<li class="list-group-item" style="color: #ffffff; border: 0px;">
+				<strong>Toplam rol sayısı</strong>:
+				<i class="fa fa-fw fa-users" aria-hidden="true"></i>
+				<%= guild.roles.size %>
+			</li>
+			<li class="list-group-item" style="color: #ffffff; border: 0px;">
+				<strong>Toplam kanal sayısı</strong>:
+				<i class="fa fa-fw fa-hashtag" aria-hidden="true"></i>
+				<%= `${guild.channels.size}`%>
+			</li>
+		</ul>
+	</div>
+</div>

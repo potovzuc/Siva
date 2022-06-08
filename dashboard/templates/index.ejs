@@ -1,0 +1,8 @@
+<%- include('blocks/header', {bot, user, path}) %>
+  <div class="jumbotron">
+    <div>
+      <h1 style="color:#ffffff">Müzik Paneli</h1>
+      <h6 style="color:#ffffff"><% if(user) { %> <%= `Hoşgeldin ${user.username}! Hemen alttaki butondan sunucunu seçip müzik botunun ayarlarını yapabilirsin!` %><br/><a style="margin-top: 20px;" class="btn btn-primary" href="/dashboard" role="button">Sunucular »</a>  <% } else { %>Müziklerinizi yönetebileceğiniz CodAre müzik paneline hoşgeldiniz! Alttaki butondan giriş yaparak başlayabilirsiniz.</h6><a style="margin-top: 20px;" class="btn btn-primary" href="/login" role="button">Giriş Yap »</a><%}%>
+
+    </div>
+  </div>
